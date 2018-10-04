@@ -24,4 +24,3 @@ Route::post('/admin/users/create','UsersController@create')->middleware('acces',
 Route::get('/admin/users/edit/{id}', 'UsersController@edit')->middleware('acces');
 Route::post('/admin/users/update/{id}', 'UsersController@update')->middleware('acces');
 Route::post('/admin/users/delete/{id}','UsersController@destroy')->middleware('acces');
-

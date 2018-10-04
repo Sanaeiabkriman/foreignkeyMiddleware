@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\User;
 use App\Role;
+use Auth;
+use Illuminate\Http\Request;
+use App\Http\Requests\ValRequest;
+use Storage;
+
 class UsersController extends Controller
 {
     /**
@@ -23,13 +27,15 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create( Request $request)
+    public function create( ValRequest $request)
     {
         $new = new User;
+        $img=$request->file('images')->store('/public/images');
         $new->name = $request->name;
         $new->role_id = $request->role;
         $new->email =$request->email;
         $new->password =bcrypt($request->password);
+        $new->images = $img;
         $new->save();
         return redirect ('/admin/users');
     }
@@ -64,7 +70,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $mod= User::find($id);
+        $mod=User::find($id);
         $role=Role::all();
         return view ('edit',compact('mod','role'));
     }

@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <form action="/admin/users/update/{{$mod->id}}" method="post">
     @csrf
     <div class="container ">
@@ -23,7 +22,7 @@
             <label for="exampleFormControlSelect1">Role</label>
             <select class="form-control" id="exampleFormControlSelect1" name="role">
                 @foreach ($role as $item)
-                <option value="{{$item->id}}">{{$item->nom}}</option>
+                <option value="{{$item->id}}">{{$item->nom}}{{old($item->id)}}</option>
                 @endforeach
             </select>
         </div>
